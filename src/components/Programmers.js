@@ -36,8 +36,11 @@ export default function Programmers() {
     // It's going to utilize both slices of state to return the _name_ of the featured dev.
     // The beauty of closures is that we can "see" both slices of state from this region
     // of the program, without needing to inject the information through arguments.
-    console.log(activeProgrammer,programmers[activeProgrammer-1],programmers[activeProgrammer-1].name)
-    return programmers[activeProgrammer-1].name
+    const findDev = programmers.filter((val) => 
+      val.id === activeProgrammer)
+    // Look through programmers array for the active programmer. Filter will 
+    console.log(findDev)
+    return findDev[0].name
   };
 
   const style = {
@@ -56,8 +59,9 @@ export default function Programmers() {
           We might think: "it works, though!" But if the list of programmers is not state,
           we could never add or edit programmers in the future. The list would be a static thing." */
           programmers.map(dev =>
-            <div className='programmer' key={dev.id -1}>
-              {dev.name} <button onClick={() => {
+            <div className='programmer' key={dev.id}>
+              {dev.name} 
+              <button onClick={() => {
                  /* in here set the featured id to be dev.id */ 
                  setActiveProgrammer(dev.id)}}>Feature</button>
             </div>
